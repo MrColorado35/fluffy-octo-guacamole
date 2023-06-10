@@ -21,3 +21,16 @@ class Selenium_Clear:
     def __init_(self):
         self.client = MongoClient("mongodb://localhost:27017/")
         self.params = ({'in_progress': 0, 'failed': 0, 'complete': 0})
+
+    def start_driver(self, proxy=""):
+        if proxy != "":
+            SP = SeleniumProxy()
+            self.driver = SP.get_ip_via_chrome()
+        else:
+            self.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+        return self.driver
+
+        
+
+
+
