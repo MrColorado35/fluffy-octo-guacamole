@@ -31,7 +31,15 @@ class Selenium_Clear:
             self.driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
         return self.driver
 
-
+    """Call the driver and open required page. In case if we won't provide any url, it will go to the deafault one"""
+    def open_page(self, website=""):
+        # Variable "website" should be specified every time before running it, but in case if it was left blank we need a page that will do no harm to our program
+        if website == "":
+            website = "https://www.sportinglife.com/racing/fast-results"
+        self.main_url = website
+        self.driver.get(self.main_url)
+        # Depending on the URL, some delay is required for program to wait until the website is fully loaded. That part will be replaced with WebDriverWait when I can spent some time poilishing this program
+        sleep(4)
 
 
 
