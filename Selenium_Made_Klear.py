@@ -24,12 +24,13 @@ class Selenium_Clear:
         # self.driver = self.start_driver(proxy=False)
 
      # Create and start the driver  
-    def start_driver(self, proxy=False):
+    @staticmethod
+    def start_driver():
         # if proxy == True:
         #     SP = SeleniumProxy()
         #     self.driver = SP.get_ip_via_chrome()
         # else:
-        driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
+        driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager(version="114.0.5735.16").install()))
         return driver
 
 
@@ -49,12 +50,13 @@ class Selenium_Clear:
     At the moment it only can search by ID or CSS selector, extend 'except' in case if you need Xpath/ Name etc.
     Just pass the string with search criteria for the driver and call it in your code
     """
-    def click_btn(self, btn):
+    @staticmethod
+    def click_btn(driver, btn):
         try:
-            click_me = self.driver.find_element(By.ID, btn)
+            click_me = driver.find_element(By.ID, btn)
             print("GOT THE ID")
         except:
-            click_me = self.driver.find_element(By.CSS_SELECTOR, btn)
+            click_me = driver.find_element(By.CSS_SELECTOR, btn)
             print("GOT THE CSS SELECTOR")
             
         click_me.click()
